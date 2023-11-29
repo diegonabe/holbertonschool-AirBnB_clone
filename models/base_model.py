@@ -2,7 +2,7 @@
 
 from datetime import datetime
 import uuid
-#import models
+import models
 
 """
 Se crea la clase BaseModel
@@ -20,7 +20,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created.at = datetime.now()
             self.updated.at = datetime.now()
-            #models.storage.new(self)
+            models.storage.new(self)
         else:
             for key, val in kwargs.items():
                 if key == "created_at" or key == "updated_at":
@@ -41,7 +41,7 @@ class BaseModel:
         Método para guardar
         """
         self.updated_at = datetime.now()
-        #models.storage.save()
+        models.storage.save()
     
     def to_dict(self):
         """
