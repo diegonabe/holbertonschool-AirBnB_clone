@@ -14,7 +14,7 @@ class BaseModel:
         """
         Método constructor de la clase BaseModel
         """
-            time_format = "%Y-%m-%dT %H:%M:%S.%f"
+        time_format = "%Y-%m-%dT %H:%M:%S.%f"
             if key == "__class__":
                 continue
             elif key == "created_at" or key == "updated_at":
