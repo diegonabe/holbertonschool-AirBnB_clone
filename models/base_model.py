@@ -30,7 +30,7 @@ class BaseModel:
              self.updated_at = datetime.utcnow()
             
              self.cls_name = self.__class__.__name__
-             models.storage.new(self)
+             storage.new(self)
 
     def __str__(self):
         """
@@ -43,8 +43,7 @@ class BaseModel:
         """
         Método para guardar
         """
-        self.updated_at = datetime.now()
-        models.storage.save()    
+        storage.save()    
 
     def to_dict(self):
         """
