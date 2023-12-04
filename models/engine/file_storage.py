@@ -33,8 +33,8 @@ class FileStorage:
         all_objs = FileStorage.__objects
         obj_dict = {}
         
-        for obj in all_objs.keys():
-            obj_dict[obj] = all_objs[obj].to_dict()
+        for obj_key in all_objs.keys():
+            obj_dict[obj_key] = all_objs[obj_key].to_dict()
             
             with open(FileStorage.__file_path, "w", encoding="utf-8") as a_file:
                 json.dump(obj_dict, a_file)
@@ -43,15 +43,15 @@ class FileStorage:
         """
 
         """
-        if os.path.isfile(FileStorage.__file_path):
+        if os.path.exists(FileStorage.__file_path):
             with open(FileStorage.__file_path, "r", encoding="utf-8") as a_file:
                 try:
                     obj_dict = json.load(file)
-                    for key. value in obj_dict.items():
-                        class_name. obj_id = key.split('.')
+                    for key, value in obj_dict.items():
+                        class_name, obj_id = key.split('.')
 
                         cls = eval(class_name)
-                        instance = cls(**values)
+                        instance = cls(**value)
                         FileStorage.__objects[key] = instance
                 except Exception as e:
                         pass                
