@@ -2,6 +2,10 @@
 import json
 import os
 
+#!/usr/bin/python3
+import json
+import os
+
 """This is a class filestore to serialize instance to JSON file and Deserialize Json file to instance"""
 
 
@@ -22,7 +26,7 @@ class FileStorage:
 
     def all(self):
         """
-        
+
         """
         return FileStorage.__objects
 
@@ -30,14 +34,13 @@ class FileStorage:
         """
 
         """
-        all_objs = FileStorage.__objects
+        all_objs = self.__class__.__objects
         obj_dict = {}
-        
+
         for obj_key in all_objs.keys():
             obj_dict[obj_key] = all_objs[obj_key].to_dict()
-            
-            with open(FileStorage.__file_path, "w", encoding="utf-8") as a_file:
-                json.dump(obj_dict, a_file)
+        with open(self.__class__.__file_path, "w", encoding="utf-8") as a_file:
+            json.dump(obj_dict, a_file)
 
     def reload(self):
         """
@@ -46,7 +49,7 @@ class FileStorage:
         if os.path.exists(FileStorage.__file_path):
             with open(FileStorage.__file_path, "r", encoding="utf-8") as a_file:
                 try:
-                    obj_dict = json.load(a_file)
+                    obj_dict = json.load(file)
                     for key, value in obj_dict.items():
                         class_name, obj_id = key.split('.')
 
@@ -54,5 +57,6 @@ class FileStorage:
                         instance = cls(**value)
                         FileStorage.__objects[key] = instance
                 except Exception as e:
-                        pass                
+                        pass
+
       
