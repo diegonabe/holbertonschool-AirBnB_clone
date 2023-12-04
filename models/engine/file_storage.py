@@ -45,8 +45,8 @@ class FileStorage:
         """
 
         """
-        if os.path.exists(self.__file_path):
-            with open(self.__file_path, "r", encoding="utf-8") as a_file:
+        if os.path.exists(self._FileStorage__file_path):
+            with open(self._FileStorage__file_path, "r", encoding="utf-8") as a_file:
                 try:
                     obj_dict = json.load(a_file)
                     for key, value in obj_dict.items():
