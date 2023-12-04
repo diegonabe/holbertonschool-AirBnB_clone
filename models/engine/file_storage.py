@@ -46,8 +46,8 @@ class FileStorage:
         """
 
         """
-        if os.path.exists(FileStorage.__file_path):
-            with open(FileStorage.__file_path, "r", encoding="utf-8") as a_file:
+        if os.path.exists(self.__file_path):
+            with open(self.__file_path, "r", encoding="utf-8") as a_file:
                 try:
                     obj_dict = json.load(a_file)
                     for key, value in obj_dict.items():
@@ -58,5 +58,4 @@ class FileStorage:
                         FileStorage.__objects[key] = instance
                 except Exception as e:
                         pass
-
-      
+                     
