@@ -49,7 +49,7 @@ class FileStorage:
         if os.path.exists(FileStorage.__file_path):
             with open(FileStorage.__file_path, "r", encoding="utf-8") as a_file:
                 try:
-                    obj_dict = json.load(file)
+                    obj_dict = json.load(a_file)
                     for key, value in obj_dict.items():
                         class_name, obj_id = key.split('.')
 
