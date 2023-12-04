@@ -37,8 +37,7 @@ class FileStorage:
         all_objs = self.__class__.__objects
         obj_dict = {}
 
-        for obj_key in all_objs.keys():
-            obj_dict[obj_key] = all_objs[obj_key].to_dict()
+        obj_dict = {key:obj.to_dict() for key, obj in self._FileStorage__objects.items()}
         with open(self.__class__.__file_path, "w", encoding="utf-8") as a_file:
             json.dump(obj_dict, a_file)
 
