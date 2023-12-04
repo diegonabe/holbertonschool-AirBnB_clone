@@ -2,7 +2,8 @@
 
 from datetime import datetime
 import uuid
-
+import models
+from models import storage
 """
 Se crea la clase BaseModel
 """
@@ -24,10 +25,12 @@ class BaseModel:
                 else:
                     setattr(self, key, value)
         else: 
-         self.id = str(uuid.uuid4())
-        
-         self.created_at = datetime.utcnow()
-         self.updated_at = datetime.utcnow()
+             self.id = str(uuid.uuid4())
+             self.created_at = datetime.utcnow()
+             self.updated_at = datetime.utcnow()
+            
+             self.cls_name = self.__class__.__name__
+             models.storage.new(self)
 
     def __str__(self):
         """
@@ -41,7 +44,8 @@ class BaseModel:
         Método para guardar
         """
         self.updated_at = datetime.now()
-            
+        models.storage.save()    
+
     def to_dict(self):
         """
         Método para crear un directorio
