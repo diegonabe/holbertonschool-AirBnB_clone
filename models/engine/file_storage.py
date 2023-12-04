@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import json
-
+import os
 
 """This is a class filestore to serialize instance to JSON file and Deserialize Json file to instance"""
 
@@ -30,23 +30,29 @@ class FileStorage:
         """
 
         """
-        obj_dict = {key: obj.to_dict() for key, obj in FileStorage.__objects.items()}     
-        with open(FileStorage.__file_path, "w", encoding="utf-8") as file:
-            json.dump(obj_dict, file)
+        all_objs = FileStorage.__objects
+        obj_dict = {}
+        
+        for obj_key in all_objs.keys():
+            obj_dict[obj_key] = all_objs[obj_key].to_dict()
+            
+            with open(FileStorage.__file_path, "w", encoding="utf-8") as a_file:
+                json.dump(obj_dict, a_file)
 
     def reload(self):
         """
 
         """
-        try:
-            with open(FileStorage.__file_path, "r", encoding="utf-8") as file:
-                  obj_dict = json.load(file)
-                  for key, value in obj_dict.items():
-                    class_name, obj_id = key.split('.')
-                    cls = eval(class_name)
-                    instance = cls(**value)
-                    FileStorage.__objects[key] = instance
-        except FileNotFoundError:
-            pass
-        except Exception as e:
-            print("Error reloading:", e)                
+        if os.path.exists(FileStorage.__file_path):
+            with open(FileStorage.__file_path, "r", encoding="utf-8") as a_file:
+                try:
+                    obj_dict = json.load(a_file)
+                    for key, value in obj_dict.items():
+                        class_name, obj_id = key.split('.')
+
+                        cls = eval(class_name)
+                        instance = cls(**value)
+                        FileStorage.__objects[key] = instance
+                except Exception as e:
+                        pass                
+      
